@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 // This is a sample state manager that uses
 public class MainStateManager : MonoBehaviour {
@@ -13,6 +14,8 @@ public class MainStateManager : MonoBehaviour {
 	public SimpleStateMachine stateMachine;
 	SimpleState menuState, playState, endState;
 
+	// PLAYER STUFF
+	public List<Player> players;
 	#endregion
 
 	void Awake () 
@@ -28,7 +31,7 @@ public class MainStateManager : MonoBehaviour {
 		endState = new SimpleState(EndEnter, EndUpdate, EndExit, "[END]");
 
 		// this is how you switch states!
-		stateMachine.SwitchStates(playState);
+		stateMachine.SwitchStates(menuState);
 	}
 
 	void Update() 
@@ -46,13 +49,17 @@ public class MainStateManager : MonoBehaviour {
 	#region MENU
 	void MenuEnter() 
 	{
-		
+		GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
+		foreach (GameObject go in playerObjects) 
+		{
+			players.Add(go.GetComponent<Player>());
+		}
 	}
 
 	void MenuUpdate() 
 	{
-		
-	}	
+		stateMachine.SwitchStates(playState);
+	}
 
 	void MenuExit()
 	{
