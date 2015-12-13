@@ -17,11 +17,6 @@ public class Player : MonoBehaviour {
 	public GameObject zone;
 	private int oldNumDevices;
 	private bool disabled = true;
-
-	// Use this for initialization
-	void Start () {
-		//ResetController();
-	}
 	
 	// Update is called once per frame
 	void Update () {
