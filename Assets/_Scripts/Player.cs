@@ -14,7 +14,6 @@ public class Player : MonoBehaviour {
 	public InputController defaultController;
 	public InputController controller;
 	public InputDevice device;
-	public GameObject zone;
 	private int oldNumDevices;
 	private bool disabled = true;
 	
@@ -83,7 +82,6 @@ public class Player : MonoBehaviour {
 			this.controller.UnsetPlayer();
 			this.GetComponent<Renderer>().enabled = false;
 			this.GetComponent<Collider2D>().enabled = false;
-			zone = null;
 			disabled = true;
 		}
 	}
@@ -103,26 +101,5 @@ public class Player : MonoBehaviour {
 
 	public bool isDisabled() {
 		return disabled;
-	}
-
-	void OnTriggerEnter(Collider collider) {
-		if (collider.gameObject.tag == "Zone") {
-			Debug.Log("Player " + playerNum + " entered zone " + collider.gameObject.name);
-			zone = collider.gameObject;
-		}
-	}
-
-	void OnTriggerStay(Collider collider) {
-		if (collider.gameObject.tag == "Zone" && collider.gameObject != zone) {
-			Debug.Log("Player " + playerNum + " entered zone " + collider.gameObject.name);
-			zone = collider.gameObject;
-		}
-	}
-
-	void OnTriggerExit(Collider collider) {
-		if (collider.gameObject.tag == "Zone") {
-			Debug.Log("Player " + playerNum + " left zone " + collider.gameObject.name);
-			zone = null;
-		}
 	}
 }

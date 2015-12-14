@@ -24,10 +24,12 @@ public class Jumper : Player
 		this.radius = radius;
 	}
 
-	public void LerpRadius(float factor)
+	public float LerpRadius(float factor)
 	{
 		float newRadius = Mathf.Lerp(radius, defaultRadius * factor, Time.deltaTime * radiusLerpSpeed);
 
 		SetRadius(newRadius);
+
+		return newRadius;
 	}
 }
